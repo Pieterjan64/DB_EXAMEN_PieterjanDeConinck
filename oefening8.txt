@@ -1,1 +1,18 @@
-UNF: Personeelsnr, naam, geboortedatum, labocode, labonaam, projectcode, projectomschrijving
+UNF: 
+	LAB ( Personeelsnr, naam, geboortedatum, labocode, labonaam, projectcode, projectomschrijving, projectsupervisor )
+
+1NF: Herhalingen in aparte tabellen, primary key's aanduiden
+
+	PERSONEEL ( Personeelsnr (PK), naam, geboortedatum, labocode )
+	LAB ( Labocode (PK), labonaam )
+	PROJECT ( Projectcode (PK), projectomschrijving, projectsupervisor )
+
+2NF: alle niet sleutel attributen moeten volledig functioneel afhankelijk zijn van primaire sleutel
+
+	PERSONEEL ( Personeelsnr (PK), naam, geboortedatum, labocode )
+	LAB ( Labocode (PK), labonaam )
+	PROJECT ( Projectcode (PK), projectomschrijving )
+	SUPERVISOR ( SupervisorID (PK), projectcode (fk) )
+
+3NF: alle elementen die niet tot een sleutel behoren mogen niet afhangen van een niet-sleutel attribuut
+
