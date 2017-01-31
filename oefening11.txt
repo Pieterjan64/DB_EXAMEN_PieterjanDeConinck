@@ -1,0 +1,20 @@
+mongoimport bioinf_mongo_examen.json
+
+Query's:
+
+- Medicijnen met GEL;DENTAL als inname
+	> db.bioinf_mongo_examen.find({"method_of_admission":"GEL;DENTAL"},{"drug":1,_id:0})
+	Antwoord: 1 => AQUASOL A
+	
+- Aantal medicijnen met in meer dan 8 % van de gevallen nevenwerkingen
+	> db.bioinf_mongo_examen.count({"percentage_of_side_effects":{$gt:8}},{})
+	Antwoord: 399
+
+- Namen van de bedrijven die medicijnen produceren met gemiddeld in meer dan 10 % vd gevallen neverwerkingen
+	> db.bioinf_mongo_examen.find(
+		{"percentage_of_side_effects":{$gt:10}},
+		{company:1,"percentage_of_side_effects":1,_id:0})
+		.sort({"percentage_of_side_effects":-1})
+
+- Onder- en bovengrens van percentage nevenwerkingen binnen bedrijven die meer dan 1 geneesmiddelen produceren
+	> 
