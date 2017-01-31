@@ -1,0 +1,53 @@
+SQL file in database steken:
+	Als root: create database bioinf_examen
+	Als root: grant all on bioinf_examen.* to guest@localhost
+	In terminal: bioinf_examen < bioinf_examen.sql
+
+
+Query's:
+
+- naam en lengte van grootste gen in het genoom
+	> select gene_name, (seq_region_end - seq_region_start + 1) as size from gene order by size desc limit 1;
+		
+		+-----------+---------+
+		| gene_name | size    |
+		+-----------+---------+
+		| TMPRSS3   | 5379014 |
+		+-----------+---------+
+
+- naam van het gen met de meeste transcripten + aantal transcripten van het gen
+	> select gene_name, count(*) as count from gene join transcript on gene.gene_id=transcript.gene_id group by gene_name order by count desc limit 1;
+
+		+-----------+-------+
+		| gene_name | count |
+		+-----------+-------+
+		| U6        |  1329 |
+		+-----------+-------+
+
+- naam van het chromosoom dat het op een na meeste genen bevat die iets vertellen over kanker + aantal exonen van dit chromosoom
+	> select gene.chromosome, count(*) as count_exons from gene join transcript on gene.gene_id=transcript.gene_id join exon_transcript on transcript.transcript_id=exon_transcript.transcript_id join exon on exon_transcript.exon_id=exon.exon_id where gene.description like "%cancer%" group by chromosome order by count_exons desc limit 1 offset 1;
+	
+		+------------+-------------+
+		| chromosome | count_exons |
+		+------------+-------------+
+		| 3          |         454 |
+		+------------+-------------+
+
+- aantal rijen uit de exon-tabel en uit de exon_transcript tabel + verklaring
+	> select count(*) as count from exon;
+	
+		+--------+
+		| count  |
+		+--------+
+		| 642590 |
+		+--------+
+		
+	> select count(*) as count from exon_transcript;
+		
+		+---------+
+		| count   |
+		+---------+
+		| 1178393 |
+		+---------+
+
+	Verklaring: De exon_transcript tabel is een xref tabel en bevat de id's van zowel de exon-tabel als de transcript-tabel
