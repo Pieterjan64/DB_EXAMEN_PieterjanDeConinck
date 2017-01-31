@@ -1,0 +1,14 @@
+
+Query's
+
+- Geef de mapping locatie van viariant rs4224828 in de muis
+	> curl 'https://rest.ensembl.org/variation/10090/rs4224828?' -H 'Content-type:text/xml'
+	Resultaat: mappings allele_string="T/C" assembly_name="GRCm38" coord_system="chromosome" end="136443949" location="4:136443949-136443949" seq_region_name="4" start="136443949" strand="1"
+
+- Geef de eerste 100 basen van de genomische FASTA-sequentie van het MYCN gen in de zebravis
+	Op Ensembl de locatie teruggevonden van het gen: chromosoom 20 met als startpositie 33391549
+	> curl 'https://rest.ensembl.org/sequence/region/zebrafish/20:33391549..33391648?type=genomic' -H 'Content-type:text/x-fasta'
+	Resultaat:
+	>chromosome:GRCz10:20:33391549:33391648:1
+	TAGAATAATACTTCACAGCCCGAAACACAGAGGCGCAGAACAGTCTTCAGTCGCCGCGGT
+	AGATGTGCGACTCCAAACGGGAGGCACAGTGACTGCGATA
