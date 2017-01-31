@@ -16,5 +16,5 @@ Query's:
 		{company:1,"percentage_of_side_effects":1,_id:0})
 		.sort({"percentage_of_side_effects":-1})
 
-- Onder- en bovengrens van percentage nevenwerkingen binnen bedrijven die meer dan 1 geneesmiddelen produceren
-	> 
+- Onder- en bovengrens van percentage nevenwerkingen binnen bedrijven die meer dan 1 geneesmiddel produceren
+	> /
